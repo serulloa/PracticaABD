@@ -1,0 +1,16 @@
+#index {
+  background: url(img/index_background.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.center {
+  margin: auto;
+  width: 250px;
+  margin-top: 400px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
