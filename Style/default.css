@@ -6,6 +6,10 @@
   background-size: cover;
 }
 
+#indexLogin {
+ display: flex;
+}
+
 .center {
   margin: auto;
   width: 300px;
@@ -14,4 +18,25 @@
   background-color: white;
   border-radius: 10px;
   text-align: center;
+}
+
+.indexInput {
+  margin-top: 5px;
+  padding: 5px;
+}
+
+.loginElements {
+  margin-left: 15px;
+  width: 200px;
+}
+
+#buttonPlay {
+  margin-left: 10px;
+  margin-top: 12px;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: rgba(255,127,39,0.9);
+  border: none;
+  color: white;
 }
