@@ -11,7 +11,7 @@
 
 <body>
   <div class="center">
-    <img id="indexLogo" src="Style/img/logo.png" alt="The logo of Songluvr" width="200px"/>
+    <img class="logo" src="Style/img/logo.png" alt="The logo of Songluvr" />
     <div>
       <form>
         <div id="indexLogin">
@@ -28,10 +28,7 @@
     </div>
   </div>
 
-  <div id="indexModal" class="modal">
-    <span onclick="document.getElementById('indexModal').style.display='none'"
-      class="close" title="Cerrar">&times;</span>
-
+  <div id="indexModal" class="modal" onclick="closeModal();">
     <form class="modal-content animate">
       <div class="modal-container">
         <label><b>Username</b></label>
@@ -44,7 +41,7 @@
       </div>
 
       <div class="modal-container" style="background-color:#f1f1f1">
-        <button type="button" onclick="document.getElementById('indexModal').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="button" onclick="closeModal();" id="cancelbtn">Cancel</button>
         <span class="psw">Forgot <a href="#">password?</a></span>
       </div>
     </form>
