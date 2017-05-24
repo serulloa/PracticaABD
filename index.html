@@ -16,8 +16,8 @@
       <form>
         <div id="indexLogin">
           <div class="indexLoginElements">
-            <input type="text" placeholder="email" required class="indexInput"/>
-            <input type="password" placeholder="contraseña" required class="indexInput"/>
+            <input type="text" placeholder="email" required class="indexInput" name="uname"/>
+            <input type="password" placeholder="contraseña" required class="indexInput" name="psw"/>
           </div>
           <button id="indexButton"></button>
         </div>
@@ -31,18 +31,26 @@
   <div id="indexModal" class="modal" onclick="closeModal();">
     <form class="modal-content animate">
       <div class="modal-container">
-        <label><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <label><b>Nombre completo</b></label>
+        <input type="text" name="uname" required>
 
-        <label><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <label><b>Email</b></label>
+        <input type="text" name="umail" required>
 
-        <button type="submit">Login</button>
+        <label><b>Edad</b></label>
+        <input type="text" name="uage" required>
+
+        <label><b>Contraseña</b></label>
+        <input type="password" name="psw" required>
+
+        <label><b>Repite contraseña</b></label>
+        <input type="password" name="repeatPsw" required>
+
+        <button type="submit">¡Regístrame!</button>
       </div>
 
       <div class="modal-container" style="background-color:#f1f1f1">
         <button type="button" onclick="closeModal();" id="cancelbtn">Cancel</button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
       </div>
     </form>
   </div>
