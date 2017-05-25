@@ -32,25 +32,24 @@
     <form class="modal-content animate">
       <div class="modal-container">
         <label><b>Nombre completo</b></label>
-        <input type="text" name="uname" required>
+        <input type="text" name="uname" class="modal-input" required>
 
         <label><b>Email</b></label>
-        <input type="text" name="umail" required>
+        <input type="text" name="umail" class="modal-input" required>
 
         <label><b>Edad</b></label>
-        <input type="text" name="uage" required>
+        <input type="text" name="uage" class="modal-input" required>
 
         <label><b>Contraseña</b></label>
-        <input type="password" name="psw" required>
+        <input type="password" name="psw" class="modal-input" required>
 
         <label><b>Repite contraseña</b></label>
-        <input type="password" name="repeatPsw" required>
-
-        <button type="submit">¡Regístrame!</button>
+        <input type="password" name="repeatPsw" class="modal-input" required>
       </div>
 
       <div class="modal-container" style="background-color:#f1f1f1">
         <button type="button" onclick="closeModal();" id="cancelbtn">Cancel</button>
+        <button type="submit" id="modalButtonSignup">¡Regístrame!</button>
       </div>
     </form>
   </div>
