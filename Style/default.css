@@ -54,6 +54,10 @@
   color: white;
 }
 
+#modalMusic {
+  display: block;
+}
+
 /*----------------------------------------------------------------------------*/
 
 .center {
@@ -124,6 +128,10 @@
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s
+}
+
+.checkbox {
+  padding: 5px;
 }
 
 /*----------------------------------------------------------------------------*/
