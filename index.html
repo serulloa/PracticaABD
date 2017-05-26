@@ -19,7 +19,7 @@
             <input type="text" placeholder="email" required class="indexInput" name="uname"/>
             <input type="password" placeholder="contraseña" required class="indexInput" name="psw"/>
           </div>
-          <button id="indexButton"></button>
+          <button type="submit" id="indexButton"></button>
         </div>
       </form>
       <div id="indexSignup">
@@ -32,19 +32,19 @@
     <form class="modal-content animate">
       <div class="modal-container">
         <label><b>Nombre completo</b></label>
-        <input type="text" name="uname" class="modal-input" required>
+        <input type="text" name="reguname" class="modal-input" required>
 
         <label><b>Email</b></label>
-        <input type="text" name="umail" class="modal-input" required>
+        <input type="text" name="regumail" class="modal-input" required>
 
         <label><b>Edad</b></label>
-        <input type="text" name="uage" class="modal-input" required>
+        <input type="text" name="reguage" class="modal-input" required>
 
         <label><b>Contraseña</b></label>
-        <input type="password" name="psw" class="modal-input" required>
+        <input type="password" name="regpsw" class="modal-input" required>
 
         <label><b>Repite contraseña</b></label>
-        <input type="password" name="repeatPsw" class="modal-input" required>
+        <input type="password" name="regrepeatPsw" class="modal-input" required>
 
         <label><b>Estilos musicales</b></label>
         <div id="modalMusic">
@@ -60,7 +60,7 @@
 
       <div class="modal-container" style="background-color:#f1f1f1">
         <button type="button" onclick="closeModal();" id="cancelbtn">Cancel</button>
-        <button type="submit" id="modalButtonSignup">¡Regístrame!</button>
+        <button type="submit" onclick="registro();" id="modalButtonSignup">¡Regístrame!</button>
       </div>
     </form>
   </div>
