@@ -23,43 +23,66 @@ function showModal() {
 function registro() {
   event.preventDefault();
 
-  var uname = document.getElementsByName('reguname');
-  var umail = document.getElementsByName('regumail');
-  var uage = document.getElementsByName('reguage');
-  var psw = document.getElementsByName('regpsw');
-  var repeatpsw = document.getElementsByName('regrepeatPsw');
+  var uname = document.getElementById('reguname').value;
+  var umail = document.getElementById('regumail').value;
+  var uage = document.getElementById('reguage').value;
+  var psw = document.getElementById('regpsw').value;
+  var repeatpsw = document.getElementById('regrepeatPsw').value;
   var music = "";
 
-  var aux = document.getElementsByClass('checkbox');
+  var ok = validateForm(uname, umail, uage, psw, repeatpsw);
+  if (ok) {
+    var aux = document.getElementsByName('music');
 
-  for (var i = 0; i < aux.length; i++) {
-    if(aux[i].checked) {
-      if(music.length === 0) {
-        music += aux[i].value;
-      }
-      else {
-        music += "$" + aux[i].value;
+    for (var i = 0; i < aux.length; i++) {
+      if(aux[i].checked) {
+        if(music.length === 0) {
+          music += aux[i].value;
+        }
+        else {
+          music += "$" + aux[i].value;
+        }
       }
     }
+
+    var query = "";
+    query = query.concat("uname=", uname, "&umail=", umail, "&uage=", uage, "&psw=", psw, "&music=", music);
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.open("POST", "PHP/registro.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(query);
   }
-
-  var query = "uname=" + uname + "&umail=" + umail + "&uage=" + uage + "&psw=" + psw;
-
-  var xhttp = new XMLHttpRequest();
-
-  xhttp.open("POST", "PHP/registro.php", true);
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send(query);
 }
 
 function validateForm(uname, umail, uage, psw, repeatpsw) {
+  var ok = false;
+
   if(uname === "") {
     alert("Nombre no puede estar vacío");
   }
   else if (umail === "") {
     alert("Email no puede estar vacío");
   }
-  else if (umail) {
-
+  else if (uage === "") {
+    alert("Edad no puede estar vacío");
   }
+  else if (isNaN(uage)) {
+    alert("Edad tiene que ser un número");
+  }
+  else if (uage < 18) {
+    alert("Tienes que tener más de 18 años");
+  }
+  else if (psw === "") {
+    alert("Constraseña no puede estar vacía");
+  }
+  else if (psw != repeatpsw) {
+    alert("Contraseña y repite contraseña deben coincidir");
+  }
+  else {
+    ok = true;
+  }
+
+  return ok;
 }
