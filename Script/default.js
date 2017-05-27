@@ -49,14 +49,13 @@ function registro() {
     query = query.concat("uname=", uname, "&umail=", umail, "&uage=", uage, "&psw=", psw, "&music=", music);
 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "PHP/registro.php", true);
     xhttp.onreadystatechange = function(){
       if(xhttp.readyState == 4 && xhttp.status == 200){
         //Aqui dentro hago cosas despues de php
-        //window.location.asign("url") pagina nueva
-        alert(xhttp.responseText);
+        window.location.assign("Script/PHP/registro.php");
       }
     };
+    xhttp.open("POST", "Script/PHP/registro.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(query);
   }
