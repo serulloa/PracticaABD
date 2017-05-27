@@ -20,7 +20,7 @@ function showModal() {
   };
 }
 
-function registro() {
+function register() {
   event.preventDefault();
 
   var uname = document.getElementById('reguname').value;
@@ -49,13 +49,15 @@ function registro() {
     query = query.concat("uname=", uname, "&umail=", umail, "&uage=", uage, "&psw=", psw, "&music=", music);
 
     var xhttp = new XMLHttpRequest();
+
+    xhttp.open("POST", "Script/PHP/register.php", true);
     xhttp.onreadystatechange = function(){
       if(xhttp.readyState == 4 && xhttp.status == 200){
         //Aqui dentro hago cosas despues de php
-        window.location.assign("Script/PHP/registro.php");
+        //window.location.assign("Script/PHP/registro.php");
+        alert(xhttp.responseText);
       }
     };
-    xhttp.open("POST", "Script/PHP/registro.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(query);
   }
