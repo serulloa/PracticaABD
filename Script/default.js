@@ -44,7 +44,7 @@ function register() {
         }
       }
     }
-
+    
     var query = "";
     query = query.concat("uname=", uname, "&umail=", umail, "&uage=", uage, "&psw=", psw, "&music=", music);
 

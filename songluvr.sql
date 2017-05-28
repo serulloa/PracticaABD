@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2017 a las 22:53:14
+-- Tiempo de generación: 28-05-2017 a las 13:36:07
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 5.6.19
 
@@ -27,19 +27,54 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `genre` (
-  `GenreId` int(11) NOT NULL,
   `name` varchar(20) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `genre`
+--
+
+INSERT INTO `genre` (`name`) VALUES
+('classic'),
+('jazz'),
+('metal'),
+('pop'),
+('punk'),
+('rock');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `genre_user`
+--
+
+CREATE TABLE `genre_user` (
+  `genreName` varchar(20) COLLATE utf8_bin NOT NULL,
+  `userEmail` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `genreuser`
+-- Estructura de tabla para la tabla `group_chat`
 --
 
-CREATE TABLE `genreuser` (
-  `GenreId` int(11) NOT NULL,
-  `UserId` int(11) NOT NULL
+CREATE TABLE `group_chat` (
+  `name` varchar(50) COLLATE utf8_bin NOT NULL,
+  `genreName` varchar(20) COLLATE utf8_bin NOT NULL,
+  `maxAge` int(11) NOT NULL,
+  `minAge` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `group_chat_user`
+--
+
+CREATE TABLE `group_chat_user` (
+  `groupName` varchar(50) COLLATE utf8_bin NOT NULL,
+  `userEmail` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -49,66 +84,43 @@ CREATE TABLE `genreuser` (
 --
 
 CREATE TABLE `message` (
-  `MessageId` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `text` text COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `messageuserall`
+-- Estructura de tabla para la tabla `message_user_all`
 --
 
-CREATE TABLE `messageuserall` (
-  `MessageId` int(11) NOT NULL,
-  `UserId` int(11) NOT NULL
+CREATE TABLE `message_user_all` (
+  `messageId` int(11) NOT NULL,
+  `userEmail` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `messageusergroup`
+-- Estructura de tabla para la tabla `message_user_group_chat`
 --
 
-CREATE TABLE `messageusergroup` (
-  `MessageId` int(11) NOT NULL,
-  `UserId` int(11) NOT NULL,
-  `GroupId` int(11) NOT NULL
+CREATE TABLE `message_user_group_chat` (
+  `messageId` int(11) NOT NULL,
+  `userEmail` varchar(50) COLLATE utf8_bin NOT NULL,
+  `groupName` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `messageuseruser`
+-- Estructura de tabla para la tabla `message_user_user`
 --
 
-CREATE TABLE `messageuseruser` (
-  `MessageId` int(11) NOT NULL,
-  `SenderId` int(11) NOT NULL,
-  `ReceiverId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `musicgroup`
---
-
-CREATE TABLE `musicgroup` (
-  `GroupId` int(11) NOT NULL,
-  `GenreId` int(11) NOT NULL,
-  `name` varchar(50) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `musicgroupuser`
---
-
-CREATE TABLE `musicgroupuser` (
-  `GroupId` int(11) NOT NULL,
-  `UserId` int(11) NOT NULL
+CREATE TABLE `message_user_user` (
+  `messageId` int(11) NOT NULL,
+  `senderEmail` varchar(50) COLLATE utf8_bin NOT NULL,
+  `receiverEmail` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -118,11 +130,10 @@ CREATE TABLE `musicgroupuser` (
 --
 
 CREATE TABLE `user` (
-  `UserId` int(11) NOT NULL,
-  `fullName` varchar(50) COLLATE utf8_bin NOT NULL,
   `email` varchar(50) COLLATE utf8_bin NOT NULL,
-  `age` int(11) NOT NULL,
-  `password` varchar(20) COLLATE utf8_bin NOT NULL
+  `name` varchar(50) COLLATE utf8_bin NOT NULL,
+  `password` varchar(20) COLLATE utf8_bin NOT NULL,
+  `age` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -133,134 +144,119 @@ CREATE TABLE `user` (
 -- Indices de la tabla `genre`
 --
 ALTER TABLE `genre`
-  ADD PRIMARY KEY (`GenreId`);
+  ADD PRIMARY KEY (`name`);
 
 --
--- Indices de la tabla `genreuser`
+-- Indices de la tabla `genre_user`
 --
-ALTER TABLE `genreuser`
-  ADD PRIMARY KEY (`GenreId`,`UserId`),
-  ADD KEY `UserId` (`UserId`);
+ALTER TABLE `genre_user`
+  ADD PRIMARY KEY (`genreName`,`userEmail`),
+  ADD KEY `userEmail` (`userEmail`);
+
+--
+-- Indices de la tabla `group_chat`
+--
+ALTER TABLE `group_chat`
+  ADD PRIMARY KEY (`name`,`genreName`),
+  ADD KEY `genreName` (`genreName`);
+
+--
+-- Indices de la tabla `group_chat_user`
+--
+ALTER TABLE `group_chat_user`
+  ADD PRIMARY KEY (`groupName`,`userEmail`),
+  ADD KEY `userEmail` (`userEmail`);
 
 --
 -- Indices de la tabla `message`
 --
 ALTER TABLE `message`
-  ADD PRIMARY KEY (`MessageId`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `messageuserall`
+-- Indices de la tabla `message_user_all`
 --
-ALTER TABLE `messageuserall`
-  ADD PRIMARY KEY (`MessageId`,`UserId`),
-  ADD KEY `UserId` (`UserId`);
+ALTER TABLE `message_user_all`
+  ADD PRIMARY KEY (`messageId`,`userEmail`),
+  ADD KEY `userEmail` (`userEmail`);
 
 --
--- Indices de la tabla `messageusergroup`
+-- Indices de la tabla `message_user_group_chat`
 --
-ALTER TABLE `messageusergroup`
-  ADD PRIMARY KEY (`MessageId`,`UserId`,`GroupId`),
-  ADD KEY `UserId` (`UserId`),
-  ADD KEY `GroupId` (`GroupId`);
+ALTER TABLE `message_user_group_chat`
+  ADD PRIMARY KEY (`messageId`,`userEmail`,`groupName`),
+  ADD KEY `groupName` (`groupName`),
+  ADD KEY `userEmail` (`userEmail`);
 
 --
--- Indices de la tabla `messageuseruser`
+-- Indices de la tabla `message_user_user`
 --
-ALTER TABLE `messageuseruser`
-  ADD PRIMARY KEY (`MessageId`,`SenderId`,`ReceiverId`),
-  ADD KEY `SenderId` (`SenderId`),
-  ADD KEY `ReceiverId` (`ReceiverId`);
-
---
--- Indices de la tabla `musicgroup`
---
-ALTER TABLE `musicgroup`
-  ADD PRIMARY KEY (`GroupId`,`GenreId`,`name`),
-  ADD KEY `GenreId` (`GenreId`);
-
---
--- Indices de la tabla `musicgroupuser`
---
-ALTER TABLE `musicgroupuser`
-  ADD PRIMARY KEY (`GroupId`,`UserId`),
-  ADD KEY `UserId` (`UserId`);
+ALTER TABLE `message_user_user`
+  ADD PRIMARY KEY (`messageId`,`senderEmail`,`receiverEmail`),
+  ADD KEY `senderEmail` (`senderEmail`),
+  ADD KEY `receiverEmail` (`receiverEmail`);
 
 --
 -- Indices de la tabla `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`UserId`,`email`);
+  ADD PRIMARY KEY (`email`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `genre`
---
-ALTER TABLE `genre`
-  MODIFY `GenreId` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `message`
 --
 ALTER TABLE `message`
-  MODIFY `MessageId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `musicgroup`
---
-ALTER TABLE `musicgroup`
-  MODIFY `GroupId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `user`
---
-ALTER TABLE `user`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `genreuser`
+-- Filtros para la tabla `genre_user`
 --
-ALTER TABLE `genreuser`
-  ADD CONSTRAINT `genreuser_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `genreuser_ibfk_2` FOREIGN KEY (`GenreId`) REFERENCES `genre` (`GenreId`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `genre_user`
+  ADD CONSTRAINT `genre_user_ibfk_1` FOREIGN KEY (`userEmail`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `genre_user_ibfk_2` FOREIGN KEY (`genreName`) REFERENCES `genre` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `messageuserall`
+-- Filtros para la tabla `group_chat`
 --
-ALTER TABLE `messageuserall`
-  ADD CONSTRAINT `messageuserall_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `messageuserall_ibfk_2` FOREIGN KEY (`MessageId`) REFERENCES `message` (`MessageId`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `group_chat`
+  ADD CONSTRAINT `group_chat_ibfk_1` FOREIGN KEY (`genreName`) REFERENCES `genre` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `messageusergroup`
+-- Filtros para la tabla `group_chat_user`
 --
-ALTER TABLE `messageusergroup`
-  ADD CONSTRAINT `messageusergroup_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `messageusergroup_ibfk_2` FOREIGN KEY (`MessageId`) REFERENCES `message` (`MessageId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `messageusergroup_ibfk_3` FOREIGN KEY (`GroupId`) REFERENCES `musicgroup` (`GroupId`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `group_chat_user`
+  ADD CONSTRAINT `group_chat_user_ibfk_1` FOREIGN KEY (`groupName`) REFERENCES `group_chat` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `group_chat_user_ibfk_2` FOREIGN KEY (`userEmail`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `messageuseruser`
+-- Filtros para la tabla `message_user_all`
 --
-ALTER TABLE `messageuseruser`
-  ADD CONSTRAINT `messageuseruser_ibfk_1` FOREIGN KEY (`SenderId`) REFERENCES `user` (`UserId`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `messageuseruser_ibfk_2` FOREIGN KEY (`ReceiverId`) REFERENCES `user` (`UserId`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `messageuseruser_ibfk_3` FOREIGN KEY (`MessageId`) REFERENCES `message` (`MessageId`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `message_user_all`
+  ADD CONSTRAINT `message_user_all_ibfk_1` FOREIGN KEY (`userEmail`) REFERENCES `user` (`email`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `message_user_all_ibfk_2` FOREIGN KEY (`messageId`) REFERENCES `message` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `musicgroup`
+-- Filtros para la tabla `message_user_group_chat`
 --
-ALTER TABLE `musicgroup`
-  ADD CONSTRAINT `musicgroup_ibfk_1` FOREIGN KEY (`GenreId`) REFERENCES `genre` (`GenreId`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `message_user_group_chat`
+  ADD CONSTRAINT `message_user_group_chat_ibfk_1` FOREIGN KEY (`messageId`) REFERENCES `message` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `message_user_group_chat_ibfk_3` FOREIGN KEY (`groupName`) REFERENCES `group_chat` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `message_user_group_chat_ibfk_4` FOREIGN KEY (`userEmail`) REFERENCES `user` (`email`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `musicgroupuser`
+-- Filtros para la tabla `message_user_user`
 --
-ALTER TABLE `musicgroupuser`
-  ADD CONSTRAINT `musicgroupuser_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `musicgroupuser_ibfk_2` FOREIGN KEY (`GroupId`) REFERENCES `musicgroup` (`GroupId`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `message_user_user`
+  ADD CONSTRAINT `message_user_user_ibfk_1` FOREIGN KEY (`senderEmail`) REFERENCES `user` (`email`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `message_user_user_ibfk_2` FOREIGN KEY (`receiverEmail`) REFERENCES `user` (`email`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `message_user_user_ibfk_3` FOREIGN KEY (`messageId`) REFERENCES `message` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

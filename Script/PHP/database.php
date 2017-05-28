@@ -1,8 +1,8 @@
 <?php
 
-  class Database {
+  class DBSongluvr {
 
-    function Database() {
+    function DBSongluvr() {
 
     }
 
@@ -19,7 +19,7 @@
         die("Connection failed: " . $conn->connect_error);
       }
 
-      return $conn
+      return $conn;
     }
 
     function close($stmt, $conn) {

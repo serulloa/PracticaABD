@@ -1,6 +1,7 @@
 <?php
 
-  require 'database.php';
+  require_once 'database.php';
+  require_once 'genreUser.php';
 
   class User {
 
@@ -18,50 +19,30 @@
       $this->genres = explode('$', $genres);
     }
 
-    function getId() {
-      $db = new Database();
-      $conn = $db->connect();
-
-      $sql = "SELECT UserId FROM user WHERE email = ?";
-      $stmt = $conn->prepare($sql);
-      $stmt->bind_param("s", $stmtemail);
-
-      $stmtemail = $this->email;
-      $stmt->execute();
-      $stmt->bind_result($userId);
-
-      $db->close();
-
-      return $userId;
-    }
-
     function register() {
-      $db = new Database();
+      $db = new DBSongluvr();
       $conn = $db->connect();
 
-      $sql = "INSERT INTO user (fullName, email, age, password) VALUES (?, ?, ?, ?)";
+      $sql = "INSERT INTO user (email, name, password, age) VALUES (?, ?, ?, ?)";
       $stmt = $conn->prepare($sql);
-      $stmt->bind_param("ssis", $stmtname, $stmtemail, $stmtage, $stmtpsw);
+      $stmt->bind_param("sssi", $stmtemail, $stmtname, $stmtpsw, $stmtage);
 
-      $stmtname = $this->uname;
       $stmtemail = $this->email;
-      $stmtage = $this->age;
+      $stmtname = $this->uname;
       $stmtpsw = $this->psw;
-      $stmt->execute();
+      $stmtage = $this->age;
+      $ok = $stmt->execute();
 
-      $this->addGenres($conn);
+      $db->close($stmt, $conn);
 
-      $db->close();
+      if($ok) {
+        $this->addGenres();
+      }
     }
 
     function addGenres() {
-      $db = new Database();
-      $conn = $db->connect();
-
-      $userId = $this->getId();
-      
-
-      $db->close();
+      $genreUser = new GenreUser();
+      $genreUser->insert($this->email, $this->genres);
     }
 
   }
