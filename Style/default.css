@@ -17,6 +17,7 @@
 .topnav {
   background-color: white;
   overflow: hidden;
+  display: inline-block;
 }
 
 .topnav a {
@@ -114,7 +115,55 @@
 
 .container {
   margin: auto;
-  width: 980px;
+  width: 950px;
+}
+
+.userBtn {
+    background-color: white;
+    background-image: url("img/user_icon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    height: 56px;
+    width: 56px;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.userMenu {
+    position: relative;
+    display: inline-block;
+    float: right;
+}
+
+.userMenu-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-left: -103px;
+}
+
+.userMenu-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.userMenu-content a:hover {background-color: #f1f1f1}
+
+.userMenu:hover .userMenu-content {
+    display: block;
+}
+
+.userMenu:hover .userBtn {
+    background-color: #f1f1f1;
 }
 
 /*----------------------------------------------------------------------------*/
