@@ -44,7 +44,7 @@ function register() {
         }
       }
     }
-    
+
     var query = "";
     query = query.concat("uname=", uname, "&umail=", umail, "&uage=", uage, "&psw=", psw, "&music=", music);
 
@@ -53,9 +53,8 @@ function register() {
     xhttp.open("POST", "Script/PHP/register.php", true);
     xhttp.onreadystatechange = function(){
       if(xhttp.readyState == 4 && xhttp.status == 200){
-        //Aqui dentro hago cosas despues de php
-        //window.location.assign("Script/PHP/registro.php");
         alert(xhttp.responseText);
+        window.location.assign("index.html");
       }
     };
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -92,4 +91,26 @@ function validateForm(uname, umail, uage, psw, repeatpsw) {
   }
 
   return ok;
+}
+
+function login() {
+  event.preventDefault();
+
+  var umail = document.getElementById('logUname').value;
+  var psw = document.getElementById('logPsw').value;
+
+  var query = "";
+  query = query.concat("&umail=", umail, "&psw=", psw);
+
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.open("POST", "Script/PHP/login.php", true);
+  xhttp.onreadystatechange = function(){
+    if(xhttp.readyState == 4 && xhttp.status == 200){
+      //alert(xhttp.responseText);
+      window.location.assign("check.php");
+    }
+  };
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send(query);
 }

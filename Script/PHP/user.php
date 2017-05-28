@@ -10,6 +10,7 @@
     var $age;
     var $psw;
     var $genres;
+    var $error = "";
 
     function User($uname = "", $email = "", $age = 18, $psw = "", $genres = "") {
       $this->uname = $uname;
@@ -17,6 +18,34 @@
       $this->age = $age;
       $this->psw = $psw;
       $this->genres = explode('$', $genres);
+    }
+
+    function login($email = "", $psw = "") {
+      $db = new DBSongluvr();
+      $conn = $db->connect();
+
+      $sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("ss", $stmtEmail, $stmtPsw);
+
+      $stmtEmail = $email;
+      $stmtPsw = $psw;
+      $ok = $stmt->execute();
+
+      if($ok) {
+        $stmt->bind_result($email, $uname, $psw, $age);
+        while ($stmt->fetch()) {
+          $this->email = $email;
+          $this->uname = $uname;
+          $this->psw = $psw;
+          $this->age = $age;
+        }
+      }
+      else {
+        $this->error = "El email o la contraseña no son válidos.";
+      }
+
+      $db->close($stmt, $conn);
     }
 
     function register() {
@@ -38,6 +67,8 @@
       if($ok) {
         $this->addGenres();
       }
+
+      return $ok;
     }
 
     function addGenres() {
