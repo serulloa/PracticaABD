@@ -7,12 +7,11 @@
   height: 25px;
 }
 
-.header {
-  background-color: white;
-  margin-left: -10px;
-  margin-top: -10px;
-  margin-right: -10px;
+#chat-container {
+  height: 870px;
 }
+
+/*----------------------------------------------------------------------------*/
 
 .topnav {
   background-color: white;
@@ -116,6 +115,10 @@
 .container {
   margin: auto;
   width: 950px;
+  background-color: white;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  margin-top: -8px;
 }
 
 .userBtn {
@@ -131,6 +134,7 @@
     font-size: 16px;
     border: none;
     cursor: pointer;
+    margin-right: 4px;
 }
 
 .userMenu {
@@ -146,7 +150,7 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    margin-left: -103px;
+    margin-left: -104px;
 }
 
 .userMenu-content a {
@@ -164,6 +168,15 @@
 
 .userMenu:hover .userBtn {
     background-color: #f1f1f1;
+}
+
+.separator {
+  height: 8px;
+  border-bottom-style: solid;
+  border-color: lightgrey;
+  border-width: 2px;
+  margin: auto;
+  width: 97%;
 }
 
 /*----------------------------------------------------------------------------*/
