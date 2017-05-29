@@ -7,7 +7,7 @@
     }
 
     function connect() {
-      $servername = "localhost";
+      $servername = "p:localhost";
       $username = "songluvr";
       $password = "admin";
       $dbname = "songluvr";

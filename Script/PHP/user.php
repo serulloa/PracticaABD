@@ -10,9 +10,8 @@
     var $age;
     var $psw;
     var $genres;
-    var $error = "";
 
-    function User($uname = "", $email = "", $age = 18, $psw = "", $genres = "") {
+    function User($uname, $email, $age, $psw, $genres) {
       $this->uname = $uname;
       $this->email = $email;
       $this->age = $age;
@@ -40,9 +39,6 @@
           $this->psw = $psw;
           $this->age = $age;
         }
-      }
-      else {
-        $this->error = "El email o la contraseña no son válidos.";
       }
 
       $db->close($stmt, $conn);

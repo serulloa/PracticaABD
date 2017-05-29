@@ -87,9 +87,23 @@ function login() {
   xhttp.onreadystatechange = function(){
     if(xhttp.readyState == 4 && xhttp.status == 200){
       //alert(xhttp.responseText);
-      window.location.assign("check.php");
+      window.location.assign("principal.html");
     }
   };
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send(query);
+}
+
+function checkIndex() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "Script/PHP/checkPrincipal.php", false);
+  xhttp.onreadystatechange = function(){
+    if(xhttp.readyState == 4 && xhttp.status == 200){
+      var result = xhttp.responseText;
+      if(result === "verdadero") {
+        window.location.assign("principal.html");
+      }
+    }
+  };
+  xhttp.send();
 }
