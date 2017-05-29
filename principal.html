@@ -6,6 +6,7 @@
 <head>
   <title>Songluvr</title>
   <link rel="stylesheet" type="text/css" href="Style/default.css">
+  <link rel="stylesheet" type="text/css" href="Style/tabs.css">
   <script src="Script/default.js"></script>
 </head>
 
@@ -13,11 +14,16 @@
   <div class="container">
     <div class="topnav" id="myTopnav">
       <a href="principal.html" id="homeLogo"></a>
-      <a href="javascript:void(0);" class="icon topnav-as" onclick="topnav()">&#9776;</a>
+      <button class="tablinks" onclick="openCity(event, 'global')" id="defaultOpen">London</button>
+      <button class="tablinks" onclick="openCity(event, 'grupos')">Paris</button>
+      <button class="tablinks" onclick="openCity(event, 'personal')">Tokyo</button>
+      <a href="javascript:void(0);" class="icon" onclick="topnav()">&#9776;</a>
     </div>
+
     <div class="userMenu">
       <button class="userBtn"></button>
       <div class="userMenu-content">
+        <a href="#">Perfil</a>
         <a href="#">Cerrar sesión</a>
       </div>
     </div>
@@ -25,8 +31,44 @@
 
   <div id="chat-container" class="container">
     <div class="separator"></div>
+    <div class="containerTabs">
+
+      <div id="global" class="tabcontent">
+        <div class="verticalTab">
+          <button class="verticalTablinks" onclick="VopenCity(event, 'London')">London</button>
+          <button class="verticalTablinks" onclick="VopenCity(event, 'Paris')">Paris</button>
+          <button class="verticalTablinks" onclick="VopenCity(event, 'Tokyo')">Tokyo</button>
+        </div>
+
+        <div id="London" class="verticalTabcontent">
+          <h3>London</h3>
+          <p>London is the capital city of England.</p>
+        </div>
+
+        <div id="Paris" class="verticalTabcontent">
+          <h3>Paris</h3>
+          <p>Paris is the capital of France.</p>
+        </div>
+
+        <div id="Tokyo" class="verticalTabcontent">
+          <h3>Tokyo</h3>
+          <p>Tokyo is the capital of Japan.</p>
+        </div>
+      </div>
+
+      <div id="grupos" class="tabcontent">
+      </div>
+
+      <div id="personal" class="tabcontent">
+      </div>
+
+    </div>
   </div>
 
 </body>
+
+<script>
+  document.getElementById('defaultOpen').click();
+</script>
 
 </html>
