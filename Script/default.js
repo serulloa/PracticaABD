@@ -32,6 +32,8 @@ function topnav() {
 function openTab(evt, tabName) {
     event.preventDefault();
 
+    //loadConvers(getCurrentTarget(evt));
+
     var i, tabcontent, tablinks;
 
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -46,12 +48,12 @@ function openTab(evt, tabName) {
 
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
-
-    //loadChat(evt);
 }
 
 function openChat(evt, chat) {
     event.preventDefault();
+
+    loadChat(getCurrentTarget(evt));
 
     var i, tabcontent, tablinks;
 
@@ -69,9 +71,38 @@ function openChat(evt, chat) {
     evt.currentTarget.className += " active";
 }
 
-function loadChat(evt) {
-  event.preventDefault();
-  var type = evt.currentTarget.id;
+function getCurrentTarget(evt) {
+  return evt.currentTarget;
+}
+
+function loadConvers(element) {
+  var type = element.id;
+  var divConvers = "";
+
+  if(type === "tabGlobal") divConvers = "global";
+  else if (type === "tabGroup") divConvers = "group";
+  else if (type === "tabPersonal") divConvers = "personal";
+
+  var query = "";
+  query = query.concat("type=", type);
+
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.open("POST", "Script/PHP/loadConvers.php", true);
+  xhttp.onreadystatechange = function(){
+    if(xhttp.readyState == 4 && xhttp.status == 200){
+      //alert(xhttp.responseText);
+      //window.location.assign("index.html");
+      document.getElementById(divConvers).innerHTML = xhttp.responseText;
+    }
+  };
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send(query);
+}
+
+function loadChat(element) {
+  var divMessages = element.id + "Messages";
+  var type = element.parentElement.parentElement.id;
 
   var query = "";
   query = query.concat("type=", type);
@@ -83,9 +114,45 @@ function loadChat(evt) {
     if(xhttp.readyState == 4 && xhttp.status == 200){
       //alert(xhttp.responseText);
       //window.location.assign("index.html");
-      document.getElementById("global").innerHTML = xhttp.responseText;
+      document.getElementById(divMessages).innerHTML = xhttp.responseText;
     }
   };
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send(query);
+}
+
+function sendMessage() {
+  event.preventDefault();
+
+  var type = document.getElementsByClassName('active');
+
+  if(type.length === 2) {
+    var message = document.getElementById('messageTextArea').value;
+
+    if(message !== "") {
+      var query = "";
+      query = query.concat("text=", message, "&type=", type[0].id, "&chat=", type[1].id);
+
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.open("POST", "Script/PHP/sendMessage.php", false);
+      xhttp.onreadystatechange = function(){
+        if(xhttp.readyState == 4 && xhttp.status == 200){
+          //alert(xhttp.responseText);
+          //window.location.assign("index.html");
+          document.getElementById('messageTextArea').value = "";
+        }
+      };
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send(query);
+
+      loadChat(type[1]);
+    }
+    else {
+      alert("El mensaje no puede estar vacío.");
+    }
+  }
+  else {
+    alert("Debe seleccionar una conversación.");
+  }
 }

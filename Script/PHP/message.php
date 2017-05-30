@@ -9,7 +9,7 @@
     var $chat;
     var $sender;
 
-    function Message($id, $text, $type, $chat, $sender) {
+    function Message($id = 0, $text = "", $type = "", $chat = "", $sender = "") {
       $this->id = $id;
       $this->text = $text;
       $this->type = $type;
@@ -21,7 +21,7 @@
       $db = new DBSongluvr();
       $conn = $db->connect();
 
-      $sql = "INSERT INTO message (text) VALUES (?)";
+      $sql = "INSERT INTO message (sentText) VALUES (?)";
       $stmt = $conn->prepare($sql);
       $stmt->bind_param("s", $stmtText);
 
@@ -61,13 +61,40 @@
     }
 
     function loadGlobal() {
-      echo ('
-        <div class="verticalTab">
-          <button class="verticalTablinks" onclick="openChat(event, "chatGlobalMessages")" id="chatGlobal">Global</button>
-        </div>
+      $db = new DBSongluvr();
+      $conn = $db->connect();
 
-        <div id="chatGlobalMessages" class="verticalTabcontent">
-      ');
+      $sql = "SELECT * FROM message_user_all";
+      $stmt = $conn->prepare($sql);
+      $ok = $stmt->execute();
+
+      if ($ok) {
+        $stmt->bind_result($id, $email);
+        while ($stmt->fetch()) {
+          echo '<h3>'.$email.'</h3>';
+
+          $connText = $db->connect();
+
+          $sqlText = "SELECT sentText FROM message WHERE id = ?";
+          $stmtText = $connText->prepare($sqlText);
+          $stmtText->bind_param("i", $stmtTextId);
+
+          $stmtTextId = $id;
+          $ok = $stmtText->execute();
+
+          if($ok) {
+            $stmtText->bind_result($text);
+            while ($stmtText->fetch()) {
+              echo '<p>'.$text.'</p>';
+              echo '<div class="separator"></div>';
+            }
+          }
+
+          $stmtText->close();
+        }
+      }
+
+      $db->close($stmt, $conn);
     }
 
     function loadGroup() {

@@ -19,7 +19,7 @@
     <div class="topnav" id="myTopnav">
       <a href="principal.html" id="homeLogo"></a>
       <button class="tablinks" onclick="openTab(event, 'global')" id="tabGlobal">Global</button>
-      <button class="tablinks" onclick="openTab(event, 'grupos')" id="tabGroup">Grupos</button>
+      <button class="tablinks" onclick="openTab(event, 'group')" id="tabGroup">Grupos</button>
       <button class="tablinks" onclick="openTab(event, 'personal')" id="tabPersonal">Personal</button>
       <a href="javascript:void(0);" class="icon" onclick="topnav()">&#9776;</a>
     </div>
@@ -39,11 +39,9 @@
 
       <div id="global" class="tabcontent">
         <div class="verticalTab">
-          <button class="verticalTablinks" onclick="openChat(event, 'chatGlobalMessages')" id="chatGlobal">Global</button>
+          <button class="verticalTablinks" onclick="openChat(event, 'chatGlobalMessages');" id="chatGlobal">Global</button>
         </div>
-
-        <div id="chatGlobalMessages" class="verticalTabcontent">
-        </div>
+        <div id="chatGlobalMessages" class="verticalTabcontent"></div>
       </div>
 
       <div id="group" class="tabcontent">
@@ -53,6 +51,7 @@
 
       <div id="personal" class="tabcontent">
         <div class="verticalTab">
+          <button class="verticalTablinks" onclick="showModalConver();" id="nuevaConver">+ Nueva conversación</button>
         </div>
       </div>
 
