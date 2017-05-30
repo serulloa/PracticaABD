@@ -29,7 +29,7 @@ div.verticalTab {
     border: 1px solid #ccc;
     background-color: #f1f1f1;
     width: 20%;
-    height: 825px;
+    height: 790px;
     overflow-y: auto;
 }
 
@@ -59,7 +59,7 @@ div.verticalTab button.active {
     padding: 0px 12px;
     border: 1px solid #ccc;
     width: 76%;
-    height: 825px;
+    height: 790px;
     display: none;
     overflow-y: auto;
 }
