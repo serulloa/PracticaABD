@@ -11,7 +11,7 @@
     var $psw;
     var $genres;
 
-    function User($uname, $email, $age, $psw, $genres) {
+    function User($uname, $email, $age, $psw, $genres = "") {
       $this->uname = $uname;
       $this->email = $email;
       $this->age = $age;
@@ -31,17 +31,22 @@
       $stmtPsw = $psw;
       $ok = $stmt->execute();
 
+      $arrayData = null;
+
       if($ok) {
         $stmt->bind_result($email, $uname, $psw, $age);
         while ($stmt->fetch()) {
-          $this->email = $email;
-          $this->uname = $uname;
-          $this->psw = $psw;
-          $this->age = $age;
+          $arrayData = array(
+            'email' => $email,
+            'uname' => $uname,
+            'psw' => $psw,
+            'age' => $age);
         }
       }
 
       $db->close($stmt, $conn);
+
+      return $arrayData;
     }
 
     function register() {

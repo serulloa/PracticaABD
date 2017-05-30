@@ -86,7 +86,6 @@ function login() {
   xhttp.open("POST", "Script/PHP/login.php", true);
   xhttp.onreadystatechange = function(){
     if(xhttp.readyState == 4 && xhttp.status == 200){
-      //alert(xhttp.responseText);
       window.location.assign("principal.html");
     }
   };

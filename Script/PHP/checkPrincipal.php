@@ -3,9 +3,8 @@
   require_once 'user.php';
 
   session_start();
-  $usuario = $_SESSION['currentUser'];
 
-  if($usuario->email == null) {
+  if(!isset($_SESSION['currentUser'])) {
     echo "falso";
   }
   else {

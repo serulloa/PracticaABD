@@ -18,9 +18,9 @@
   <div class="container">
     <div class="topnav" id="myTopnav">
       <a href="principal.html" id="homeLogo"></a>
-      <button class="tablinks" onclick="openTab(event, 'global')" id="defaultOpen">Global</button>
-      <button class="tablinks" onclick="openTab(event, 'grupos')">Grupos</button>
-      <button class="tablinks" onclick="openTab(event, 'personal')">Personal</button>
+      <button class="tablinks" onclick="openTab(event, 'global')" id="tabGlobal">Global</button>
+      <button class="tablinks" onclick="openTab(event, 'grupos')" id="tabGroup">Grupos</button>
+      <button class="tablinks" onclick="openTab(event, 'personal')" id="tabPersonal">Personal</button>
       <a href="javascript:void(0);" class="icon" onclick="topnav()">&#9776;</a>
     </div>
 
@@ -39,7 +39,7 @@
 
       <div id="global" class="tabcontent">
         <div class="verticalTab">
-          <button class="verticalTablinks" onclick="openChat(event, 'prueba')">Prueba</button>
+          <button class="verticalTablinks" onclick="openChat(event, 'prueba')" id="chatPrueba">Prueba</button>
         </div>
 
         <div id="prueba" class="verticalTabcontent">
@@ -63,7 +63,7 @@
         </div>
       </div>
 
-      <div id="grupos" class="tabcontent">
+      <div id="group" class="tabcontent">
         <div class="verticalTab">
         </div>
       </div>
@@ -88,7 +88,7 @@
 </body>
 
 <script>
-  document.getElementById('defaultOpen').click();
+  document.getElementById('tabGlobal').click();
 </script>
 
 </html>

@@ -1,17 +1,14 @@
 <?php
-  
+
   require_once 'user.php';
 
-  $user = new User();
-  $user->login($_POST['umail'], $_POST['psw']);
+  $userArray = User::login($_POST['umail'], $_POST['psw']);
 
-  if($user->error == "") {
+  if ($userArray != null) {
+    $user = new User($userArray['uname'], $userArray['email'], $userArray['psw'], $userArray['age']);
+
     session_start();
-
     $_SESSION['currentUser'] = $user;
-  }
-  else {
-    echo $user->error;
   }
 
 ?>

@@ -11,18 +11,23 @@
       $this->text = $text;
     }
 
-    function insertMessage($text) {
-      $db = new DBSongluvr();
-      $conn = $db.connect();
+    function insertMessage($text, $type, $chat, $sender) {
+      echo $sender;
 
-      $sql = "INSERT INTO message (name) VALUES (?)";
+      $db = new DBSongluvr();
+      $conn = $db->connect();
+
+      $sql = "INSERT INTO message (text) VALUES (?)";
       $stmt = $conn->prepare($sql);
       $stmt->bind_param("s", $stmtText);
 
       $stmtText = $text;
       $ok = $stmt->execute();
 
-      $db.close($stmt, $conn);
+      $id = $conn->insert_id;
+      echo $id;
+
+      $db->close($stmt, $conn);
     }
   }
 
