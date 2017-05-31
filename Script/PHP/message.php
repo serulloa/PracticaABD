@@ -17,7 +17,7 @@
       $this->sender = $sender;
     }
 
-    function insertMessage($text, $type, $chat, $sender) {
+    function insertMessage($text) {
       $db = new DBSongluvr();
       $conn = $db->connect();
 

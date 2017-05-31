@@ -5,8 +5,8 @@
 <html>
 <head>
   <title>Songluvr</title>
-  <link rel="stylesheet" type="text/css" href="Style/default.css">
-  <link rel="stylesheet" type="text/css" href="Style/tabs.css">
+  <link rel="stylesheet" type="text/css" href="Style/default.css" />
+  <link rel="stylesheet" type="text/css" href="Style/principal.css" />
   <script src="Script/default.js"></script>
   <script src="Script/principal.js"></script>
   <script>
@@ -62,6 +62,23 @@
       </div>
     </form>
 
+  </div>
+
+  <div id="modal" class="modal" onclick="closeModal();">
+    <form class="modal-content animate">
+      <div class="modal-container">
+        <label><b>Email del destinatario</b></label>
+        <input type="text" id="receiverEmail" class="modal-input" required>
+
+        <label><b>Mensaje</b></label>
+        <input type="text" id="text" class="modal-input" required>
+      </div>
+
+      <div class="modal-container" style="background-color:#f1f1f1">
+        <button type="button" onclick="closeModal();" id="cancelbtn">Cancel</button>
+        <button type="submit" onclick="newConversation();" id="acceptbtn">Enviar</button>
+      </div>
+    </form>
   </div>
 
 </body>

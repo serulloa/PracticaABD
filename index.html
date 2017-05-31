@@ -28,12 +28,12 @@
         </div>
       </form>
       <div id="indexSignup">
-        ¿No tienes una cuenta? ¡<button onclick="showModal();" id="indexButtonSignup">Regístrate</button> ahora!
+        ¿No tienes una cuenta? ¡<button onclick="showModal();" id="modalBtn">Regístrate</button> ahora!
       </div>
     </div>
   </div>
 
-  <div id="indexModal" class="modal" onclick="closeModal();">
+  <div id="modal" class="modal" onclick="closeModal();">
     <form class="modal-content animate">
       <div class="modal-container">
         <label><b>Nombre completo</b></label>
@@ -65,7 +65,7 @@
 
       <div class="modal-container" style="background-color:#f1f1f1">
         <button type="button" onclick="closeModal();" id="cancelbtn">Cancel</button>
-        <button type="submit" onclick="register();" id="modalButtonSignup">¡Regístrame!</button>
+        <button type="submit" onclick="register();" id="acceptbtn">¡Regístrame!</button>
       </div>
     </form>
   </div>

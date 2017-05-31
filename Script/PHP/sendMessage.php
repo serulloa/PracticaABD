@@ -6,7 +6,7 @@
   session_start();
   $email = $_SESSION['email'];
 
-  $id = Message::insertMessage($_POST['text'], $_POST['type'], $_POST['chat'], $email);
+  $id = Message::insertMessage($_POST['text']);
   $message = new Message($id, $_POST['text'], $_POST['type'], $_POST['chat'], $email);
 
   if($message->type == 'tabGlobal') {

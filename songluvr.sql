@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2017 a las 12:57:36
+-- Tiempo de generación: 31-05-2017 a las 15:36:11
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 5.6.19
 
@@ -31,6 +31,15 @@ CREATE TABLE `conversation` (
   `email1` varchar(50) COLLATE utf8_bin NOT NULL,
   `email2` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `conversation`
+--
+
+INSERT INTO `conversation` (`id`, `email1`, `email2`) VALUES
+(1, 'anagarc@gmail.com', 'sergio@admin.com'),
+(2, 'adrimu@ucm.es', 'sergio@admin.com'),
+(3, 'sergio@admin.com', 'apascual@ucm.es');
 
 -- --------------------------------------------------------
 
@@ -127,7 +136,8 @@ INSERT INTO `message` (`id`, `sentText`) VALUES
 (4, 'hola soy ana'),
 (5, 'hola soy sergio'),
 (8, 'hola soy adri'),
-(9, 'hola soy sergio, andres');
+(9, 'hola soy sergio, andres'),
+(10, 'hola adri, que tal?');
 
 -- --------------------------------------------------------
 
@@ -137,8 +147,20 @@ INSERT INTO `message` (`id`, `sentText`) VALUES
 
 CREATE TABLE `message_conversation` (
   `messageId` int(11) NOT NULL,
-  `conversationId` int(11) NOT NULL
+  `conversationId` int(11) NOT NULL,
+  `senderEmail` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `message_conversation`
+--
+
+INSERT INTO `message_conversation` (`messageId`, `conversationId`, `senderEmail`) VALUES
+(4, 1, 'anagarc@gmail.com'),
+(5, 1, 'sergio@admin.com'),
+(8, 2, 'adrimu@ucm.es'),
+(9, 3, 'sergio@admin.com'),
+(10, 2, 'sergio@admin.com');
 
 -- --------------------------------------------------------
 
@@ -244,8 +266,9 @@ ALTER TABLE `message`
 -- Indices de la tabla `message_conversation`
 --
 ALTER TABLE `message_conversation`
-  ADD PRIMARY KEY (`messageId`,`conversationId`),
-  ADD KEY `conversationId` (`conversationId`);
+  ADD PRIMARY KEY (`messageId`,`conversationId`,`senderEmail`),
+  ADD KEY `conversationId` (`conversationId`),
+  ADD KEY `senderEmail` (`senderEmail`);
 
 --
 -- Indices de la tabla `message_user_all`
@@ -276,12 +299,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `conversation`
 --
 ALTER TABLE `conversation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Restricciones para tablas volcadas
 --
@@ -318,7 +341,8 @@ ALTER TABLE `group_chat_user`
 --
 ALTER TABLE `message_conversation`
   ADD CONSTRAINT `message_conversation_ibfk_1` FOREIGN KEY (`conversationId`) REFERENCES `conversation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `message_conversation_ibfk_2` FOREIGN KEY (`messageId`) REFERENCES `message` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `message_conversation_ibfk_2` FOREIGN KEY (`messageId`) REFERENCES `message` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `message_conversation_ibfk_3` FOREIGN KEY (`senderEmail`) REFERENCES `user` (`email`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `message_user_all`

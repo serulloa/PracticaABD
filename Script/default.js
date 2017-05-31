@@ -1,5 +1,5 @@
  function closeModal() {
-  var modal = document.getElementById('indexModal');
+  var modal = document.getElementById('modal');
   var cancel = document.getElementById('cancelbtn');
 
   window.onclick = function(event) {
@@ -10,8 +10,8 @@
 }
 
 function showModal() {
-  var modal = document.getElementById('indexModal');
-  var registrate = document.getElementById('indexButtonSignup');
+  var modal = document.getElementById('modal');
+  var registrate = document.getElementById('modalBtn');
 
   window.onclick = function(event) {
     if (event.target == registrate) {
