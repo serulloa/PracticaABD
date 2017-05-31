@@ -57,7 +57,21 @@
     }
 
     function insertPersonal() {
+      $db = new DBSongluvr();
+      $conn = $db->connect();
 
+      $sql = "INSERT INTO message_conversation (messageId, conversationId, senderEmail) VALUES (?, ?, ?)";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("iis", $stmtMessageId, $stmtConverstionId, $stmtSenderEmail);
+
+      $stmtMessageId = $this->id;
+      $stmtConverstionId = $this->chat;
+      $stmtSenderEmail = $this->sender;
+      $ok = $stmt->execute();
+
+      $db->close($stmt, $conn);
+
+      return $ok;
     }
 
     function loadGlobal() {
