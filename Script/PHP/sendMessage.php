@@ -4,7 +4,7 @@
   require_once 'user.php';
 
   session_start();
-  $email = $_SESSION['currentUser']->email;
+  $email = $_SESSION['email'];
 
   $id = Message::insertMessage($_POST['text'], $_POST['type'], $_POST['chat'], $email);
   $message = new Message($id, $_POST['text'], $_POST['type'], $_POST['chat'], $email);

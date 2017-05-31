@@ -101,8 +101,42 @@
 
     }
 
-    function loadPersonal() {
+    function loadPersonal($converId) {
+      $db = new DBSongluvr();
+      $connEmail = $db->connect();
+      $connText = $db->connect();
 
+      $sqlEmail = "SELECT messageId, senderEmail FROM message_conversation WHERE conversationId = ?";
+      $stmtEmail = $connEmail->prepare($sqlEmail);
+      $stmtEmail->bind_param("i", $stmtEmailId);
+
+      $stmtEmailId = $converId;
+      $ok = $stmtEmail->execute();
+
+      if ($ok) {
+        $stmtEmail->bind_result($messageId, $senderEmail);
+        while ($stmtEmail->fetch()) {
+          echo "<h3>".$senderEmail."</h3>";
+
+          $sqlText = "SELECT sentText FROM message WHERE id = ?";
+          $stmtText = $connText->prepare($sqlText);
+          $stmtText->bind_param("i", $stmtTextId);
+
+          $stmtTextId = $messageId;
+          $ok = $stmtText->execute();
+
+          if($ok) {
+            $stmtText->bind_result($text);
+            while ($stmtText->fetch()) {
+              echo '<p>'.$text.'</p>';
+              echo '<div class="separator"></div>';
+            }
+          }
+        }
+      }
+
+      $db->close($stmtEmail, $connEmail);
+      $db->close($stmtText, $connText);
     }
   }
 

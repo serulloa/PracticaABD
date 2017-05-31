@@ -2,15 +2,15 @@
 
   session_start();
   require_once 'chats.php';
+  require_once 'user.php';
 
   $type = $_POST['type'];
+  $email = $_SESSION['email'];
 
-  if ($type == 'global') {
-
-  } elseif ($type == 'group') {
+  if ($type == 'group') {
 
   } elseif ($type == 'personal') {
-
+    Chats::loadPersonal($email);
   }
 
 ?>

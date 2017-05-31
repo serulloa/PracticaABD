@@ -19,21 +19,30 @@
       $stmtEmail2 = $email;
       $ok = $stmt->execute();
 
+      $arrayIds = array();
+
       if ($ok) {
         $stmt->bind_result($id, $email1, $email2);
         while ($stmt->fetch()) {
-          echo "<button class='verticalTablinks' onclick='openChat(event, '".$id."Messages');' id='".$id."'>";
+          echo "<button class='verticalTablinks' onclick='openChat(event, ".'"'.$id."Messages".'"'.");' id='".$id."'>";
 
           if ($email1 == $email) echo $email2;
           else echo $email1;
 
           echo "</button>";
+
+          array_push($arrayIds, $id);
         }
       }
 
       $db->close($stmt, $conn);
 
       echo "</div>";
+      foreach ($arrayIds as $idContent) {
+        echo "<div id='".$idContent."Messages' class='verticalTabcontent'>
+
+        </div>";
+      }
     }
 
   }

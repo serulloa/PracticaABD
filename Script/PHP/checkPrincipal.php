@@ -4,7 +4,7 @@
 
   session_start();
 
-  if(!isset($_SESSION['currentUser'])) {
+  if(!isset($_SESSION['email'])) {
     echo "falso";
   }
   else {

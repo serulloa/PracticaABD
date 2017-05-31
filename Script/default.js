@@ -79,33 +79,35 @@ function loadConvers(element) {
   var type = element.id;
   var divConvers = "";
 
-  if(type === "tabGlobal") divConvers = "global";
-  else if (type === "tabGroup") divConvers = "group";
-  else if (type === "tabPersonal") divConvers = "personal";
+  if(type !== "tabGlobal") {
+    if (type === "tabGroup") divConvers = "group";
+    else if (type === "tabPersonal") divConvers = "personal";
 
-  var query = "";
-  query = query.concat("type=", divConvers);
+    var query = "";
+    query = query.concat("type=", divConvers);
 
-  var xhttp = new XMLHttpRequest();
+    var xhttp = new XMLHttpRequest();
 
-  xhttp.open("POST", "Script/PHP/loadConvers.php", true);
-  xhttp.onreadystatechange = function(){
-    if(xhttp.readyState == 4 && xhttp.status == 200){
-      alert(xhttp.responseText);
-      //window.location.assign("index.html");
-      //document.getElementById(divConvers).innerHTML = xhttp.responseText;
-    }
-  };
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send(query);
+    xhttp.open("POST", "Script/PHP/loadConvers.php", true);
+    xhttp.onreadystatechange = function(){
+      if(xhttp.readyState == 4 && xhttp.status == 200){
+        //alert(xhttp.responseText);
+        //window.location.assign("index.html");
+        document.getElementById(divConvers).innerHTML = xhttp.responseText;
+      }
+    };
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(query);
+  }
 }
 
 function loadChat(element) {
+  var id = element.id;
   var divMessages = element.id + "Messages";
   var type = element.parentElement.parentElement.id;
 
   var query = "";
-  query = query.concat("type=", type);
+  query = query.concat("type=", type, "&id=", id);
 
   var xhttp = new XMLHttpRequest();
 

@@ -4,6 +4,7 @@
   require_once 'message.php';
 
   $type = $_POST['type'];
+  $id = $_POST['id'];
 
   $message = new Message();
 
@@ -12,7 +13,7 @@
   } elseif ($type == 'group') {
     $message->loadGroup();
   } elseif ($type == 'personal') {
-    $message->loadPersonal();
+    $message->loadPersonal($id);
   }
 
 ?>
