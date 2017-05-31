@@ -1,3 +1,15 @@
+#adminbtn {
+  float: right;
+  width: auto;
+  padding: 10px 18px;
+  background-color: blue;
+  border: none;
+  border-radius: 2px;
+  color: white;
+}
+
+/*----------------------------------------------------------------------------*/
+
 .topnav button {
   float: left;
   display: block;

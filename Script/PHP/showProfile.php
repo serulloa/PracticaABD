@@ -8,12 +8,13 @@
   $genreArray = GenreUser::getGenres($_SESSION['email']);
 
   if ($userArray != null) {
-    $user = new User($userArray['uname'], $userArray['email'], $userArray['age'], $userArray['psw']);
+    $user = new User($userArray['uname'], $userArray['email'], $userArray['age'], $userArray['psw'], "", $userArray['admin']);
 
     $_SESSION['uname'] = $user->uname;
     $_SESSION['email'] = $user->email;
     $_SESSION['age'] = $user->age;
     $_SESSION['genres'] = $genreArray;
+    $_SESSION['admin'] = $user->admin;
   }
 
   echo "<h3>Nombre</h3><p>".$_SESSION['uname']."</p>";

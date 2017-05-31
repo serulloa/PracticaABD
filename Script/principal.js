@@ -1,16 +1,3 @@
-function logout() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "Script/PHP/logout.php", true);
-  xhttp.onreadystatechange = function(){
-    if(xhttp.readyState == 4 && xhttp.status == 200){
-      window.location.assign("index.html");
-    }
-  };
-  xhttp.send();
-
-  return false;
-}
-
 function checkPrincipal() {
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "Script/PHP/checkPrincipal.php", false);
@@ -64,4 +51,18 @@ function showProfile() {
   };
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send();
+
+  showAdmin();
+}
+
+function showAdmin() {
+  if (isAdmin()) {
+    var html = "<button type='button' onclick='goToAdmin();' id='adminbtn'>Administración</button>";
+    var innerHTML = document.getElementById('containerAdmin').innerHTML;
+    document.getElementById('containerAdmin').innerHTML = innerHTML + html;
+  }
+}
+
+function goToAdmin() {
+  window.location.assign("admin.html");
 }

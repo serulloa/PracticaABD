@@ -20,6 +20,19 @@ function showModal(m, b) {
   };
 }
 
+function logout() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "Script/PHP/logout.php", true);
+  xhttp.onreadystatechange = function(){
+    if(xhttp.readyState == 4 && xhttp.status == 200){
+      window.location.assign("index.html");
+    }
+  };
+  xhttp.send();
+
+  return false;
+}
+
 function topnav() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
@@ -157,4 +170,24 @@ function sendMessage() {
   else {
     alert("Debe seleccionar una conversación.");
   }
+}
+
+function isAdmin() {
+  var isAdmin = false;
+  var cadena = "falso";
+
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.open("GET", "Script/PHP/isAdmin.php", false);
+  xhttp.onreadystatechange = function(){
+    if(xhttp.readyState == 4 && xhttp.status == 200){
+      cadena = xhttp.responseText;
+    }
+  };
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();
+
+  if (cadena === "verdadero") isAdmin = true;
+
+  return isAdmin;
 }

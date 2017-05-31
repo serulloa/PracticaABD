@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<html>
+<head>
+  <title>Administración</title>
+  <link rel="stylesheet" type="text/css" href="Style/default.css" />
+  <link rel="stylesheet" type="text/css" href="Style/admin.css" />
+  <script src="Script/jquery-3.2.1.min.js"></script>
+  <script src="Script/default.js"></script>
+  <script src="Script/admin.js"></script>
+  <script>
+    checkAdmin();
+  </script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="topnav" id="myTopnav">
+      <a href="principal.html" id="homeLogo"></a>
+      <a href="javascript:void(0);" class="icon" onclick="topnav()">&#9776;</a>
+    </div>
+
+    <div class="userMenu">
+      <button class="userBtn"></button>
+      <div class="userMenu-content">
+        <a href="index.html" onclick="return logout();">Cerrar sesión</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="chat-container" class="container">
+    <div class="separator"></div>
+    <form class="group-container">
+      <h3>Creación de grupos</h3>
+      <div class="create-group group-left">
+        <label for="groupName">Nombre del grupo</label>
+        <input type="text" id="groupName" required class="input-group"><br>
+        <label for="groupGenre">Género</label>
+        <select id="groupGenre" class="input-group">
+          <option value="Clásica">Clásica</option>
+          <option value="Jazz">Jazz</option>
+          <option value="Metal">Metal</option>
+          <option value="Pop">Pop</option>
+          <option value="Punk">Punk</option>
+          <option value="Rock">Rock</option>
+        </select>
+      </div>
+      <div class="create-group group-right">
+        <label for="groupMaxAge">Edad máxima</label>
+        <input type="number" id="groupMaxAge" required class="input-group"><br>
+        <label for="groupMinAge">Edad mínima</label>
+        <input type="number" id="groupMinAge" required class="input-group"><br>
+      </div>
+      <button type="submit" class="acceptbtn" onclick="createGroup();">Crear</button>
+    </form>
+
+    <div class="separator"></div>
+
+    <form class="group-container">
+      <h3>Añadir un usuario a un grupo</h3>
+      <label for="group">Grupo</label>
+      <select id="group" class="input-group" onchange="loadUsers(this.value)">
+        <option value="default">-----</option>
+      </select>
+      <label for="user">Usuario</label>
+      <select id="user" class="input-group">
+      </select>
+      <button type="submit" class="acceptbtn">Añadir</button>
+    </form>
+  </div>
+
+</body>
+
+</html>

@@ -10,13 +10,15 @@
     var $age;
     var $psw;
     var $genres;
+    var $admin;
 
-    function User($uname, $email, $age, $psw, $genres = "") {
+    function User($uname, $email, $age, $psw, $genres = "", $admin = false) {
       $this->uname = $uname;
       $this->email = $email;
       $this->age = $age;
       $this->psw = $psw;
       $this->genres = explode('$', $genres);
+      $this->admin = $admin;
     }
 
     function login($email = "", $psw = "") {
@@ -34,13 +36,14 @@
       $arrayData = null;
 
       if($ok) {
-        $stmt->bind_result($email, $uname, $psw, $age);
+        $stmt->bind_result($email, $uname, $psw, $age, $admin);
         while ($stmt->fetch()) {
           $arrayData = array(
             'email' => $email,
             'uname' => $uname,
             'psw' => $psw,
-            'age' => $age);
+            'age' => $age,
+            'admin' => $admin);
         }
       }
 
@@ -91,13 +94,14 @@
       $arrayData = null;
 
       if($ok) {
-        $stmt->bind_result($email, $uname, $psw, $age);
+        $stmt->bind_result($email, $uname, $psw, $age, $admin);
         while ($stmt->fetch()) {
           $arrayData = array(
             'email' => $email,
             'uname' => $uname,
             'psw' => $psw,
-            'age' => $age);
+            'age' => $age,
+            'admin' => $admin);
         }
       }
 
