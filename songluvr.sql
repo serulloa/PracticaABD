@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2017 a las 15:36:11
+-- Tiempo de generación: 31-05-2017 a las 23:46:10
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 5.6.19
 
@@ -39,7 +39,8 @@ CREATE TABLE `conversation` (
 INSERT INTO `conversation` (`id`, `email1`, `email2`) VALUES
 (1, 'anagarc@gmail.com', 'sergio@admin.com'),
 (2, 'adrimu@ucm.es', 'sergio@admin.com'),
-(3, 'sergio@admin.com', 'apascual@ucm.es');
+(3, 'sergio@admin.com', 'apascual@ucm.es'),
+(4, 'sergio@admin.com', 'sefreire@ucm.es');
 
 -- --------------------------------------------------------
 
@@ -56,12 +57,12 @@ CREATE TABLE `genre` (
 --
 
 INSERT INTO `genre` (`name`) VALUES
-('classic'),
-('jazz'),
-('metal'),
-('pop'),
-('punk'),
-('rock');
+('Clásica'),
+('Jazz'),
+('Metal'),
+('Pop'),
+('Punk'),
+('Rock');
 
 -- --------------------------------------------------------
 
@@ -79,16 +80,22 @@ CREATE TABLE `genre_user` (
 --
 
 INSERT INTO `genre_user` (`genreName`, `userEmail`) VALUES
-('classic', 'anagarc@gmail.com'),
-('jazz', 'anagarc@gmail.com'),
-('jazz', 'sergio@admin.com'),
-('metal', 'apascual@ucm.es'),
-('metal', 'sergio@admin.com'),
-('pop', 'anagarc@gmail.com'),
-('punk', 'apascual@ucm.es'),
-('punk', 'sergio@admin.com'),
-('rock', 'apascual@ucm.es'),
-('rock', 'sergio@admin.com');
+('Clásica', 'anagarc@gmail.com'),
+('Clásica', 'prueba'),
+('Clásica', 'sefreire@ucm.es'),
+('Jazz', 'anagarc@gmail.com'),
+('Jazz', 'sergio@admin.com'),
+('Metal', 'apascual@ucm.es'),
+('Metal', 'sefreire@ucm.es'),
+('Metal', 'sergio@admin.com'),
+('Pop', 'anagarc@gmail.com'),
+('Pop', 'sefreire@ucm.es'),
+('Punk', 'apascual@ucm.es'),
+('Punk', 'sefreire@ucm.es'),
+('Punk', 'sergio@admin.com'),
+('Rock', 'apascual@ucm.es'),
+('Rock', 'sefreire@ucm.es'),
+('Rock', 'sergio@admin.com');
 
 -- --------------------------------------------------------
 
@@ -102,6 +109,13 @@ CREATE TABLE `group_chat` (
   `maxAge` int(11) NOT NULL,
   `minAge` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `group_chat`
+--
+
+INSERT INTO `group_chat` (`name`, `genreName`, `maxAge`, `minAge`) VALUES
+('punkarras', 'Punk', 18, 99);
 
 -- --------------------------------------------------------
 
@@ -137,7 +151,8 @@ INSERT INTO `message` (`id`, `sentText`) VALUES
 (5, 'hola soy sergio'),
 (8, 'hola soy adri'),
 (9, 'hola soy sergio, andres'),
-(10, 'hola adri, que tal?');
+(10, 'hola adri, que tal?'),
+(14, 'hola sergio');
 
 -- --------------------------------------------------------
 
@@ -160,7 +175,8 @@ INSERT INTO `message_conversation` (`messageId`, `conversationId`, `senderEmail`
 (5, 1, 'sergio@admin.com'),
 (8, 2, 'adrimu@ucm.es'),
 (9, 3, 'sergio@admin.com'),
-(10, 2, 'sergio@admin.com');
+(10, 2, 'sergio@admin.com'),
+(14, 4, 'sergio@admin.com');
 
 -- --------------------------------------------------------
 
@@ -204,18 +220,21 @@ CREATE TABLE `user` (
   `email` varchar(50) COLLATE utf8_bin NOT NULL,
   `name` varchar(50) COLLATE utf8_bin NOT NULL,
   `password` varchar(20) COLLATE utf8_bin NOT NULL,
-  `age` int(11) NOT NULL
+  `age` int(11) NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`email`, `name`, `password`, `age`) VALUES
-('adrimu@ucm.es', 'Adrián Muñoz', 'ohohoh', 21),
-('anagarc@gmail.com', 'Ana Garcí­a', 'ana', 46),
-('apascual@ucm.es', 'Andrés Pascual', 'pohchico', 28),
-('sergio@admin.com', 'Sergio Ulloa', 'polloloco', 21);
+INSERT INTO `user` (`email`, `name`, `password`, `age`, `admin`) VALUES
+('adrimu@ucm.es', 'Adrián Muñoz', 'ohohoh', 21, 0),
+('anagarc@gmail.com', 'Ana Garcí­a', 'ana', 46, 0),
+('apascual@ucm.es', 'Andrés Pascual', 'pohchico', 28, 0),
+('prueba', 'prueba ', 'prueba', 34, 0),
+('sefreire@ucm.es', 'Sergio Freire', 'waifu', 21, 0),
+('sergio@admin.com', 'Sergio Ulloa', 'polloloco', 21, 1);
 
 --
 -- Índices para tablas volcadas
@@ -299,12 +318,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `conversation`
 --
 ALTER TABLE `conversation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Restricciones para tablas volcadas
 --
