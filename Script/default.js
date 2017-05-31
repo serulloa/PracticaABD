@@ -1,20 +1,20 @@
- function closeModal() {
-  var modal = document.getElementById('modal');
-  var cancel = document.getElementById('cancelbtn');
+function closeModal(m, b) {
+  var modal = document.getElementById(m);
+  var btn = document.getElementById(b);
 
   window.onclick = function(event) {
-    if (event.target == modal || event.target == cancel) {
+    if (event.target == modal || event.target == btn) {
       modal.style.display = "none";
     }
   };
 }
 
-function showModal() {
-  var modal = document.getElementById('modal');
-  var registrate = document.getElementById('modalBtn');
+function showModal(m, b) {
+  var modal = document.getElementById(m);
+  var btn = document.getElementById(b);
 
   window.onclick = function(event) {
-    if (event.target == registrate) {
+    if (event.target == btn) {
       modal.style.display = "block";
     }
   };

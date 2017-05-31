@@ -28,12 +28,12 @@
         </div>
       </form>
       <div id="indexSignup">
-        ¿No tienes una cuenta? ¡<button onclick="showModal();" id="modalBtn">Regístrate</button> ahora!
+        ¿No tienes una cuenta? ¡<button onclick="showModal('modal', 'modalBtn');" id="modalBtn">Regístrate</button> ahora!
       </div>
     </div>
   </div>
 
-  <div id="modal" class="modal" onclick="closeModal();">
+  <div id="modal" class="modal" onclick="closeModal('modal', 'cancelbtn');">
     <form class="modal-content animate">
       <div class="modal-container">
         <label><b>Nombre completo</b></label>
@@ -53,18 +53,18 @@
 
         <label><b>Estilos musicales</b></label>
         <div id="modalMusic">
-          <input type="checkbox" name="music" value="classic" class="checkbox"/> Clásica<br />
-          <input type="checkbox" name="music" value="jazz" class="checkbox"/> Jazz<br />
-          <input type="checkbox" name="music" value="metal" class="checkbox"/> Metal<br />
-          <input type="checkbox" name="music" value="pop" class="checkbox"/> Pop<br />
-          <input type="checkbox" name="music" value="punk" class="checkbox"/> Punk<br />
-          <input type="checkbox" name="music" value="rock" class="checkbox"/> Rock<br />
+          <input type="checkbox" name="music" value="Clásica" class="checkbox"/> Clásica<br />
+          <input type="checkbox" name="music" value="Jazz" class="checkbox"/> Jazz<br />
+          <input type="checkbox" name="music" value="Metal" class="checkbox"/> Metal<br />
+          <input type="checkbox" name="music" value="Pop" class="checkbox"/> Pop<br />
+          <input type="checkbox" name="music" value="Punk" class="checkbox"/> Punk<br />
+          <input type="checkbox" name="music" value="Rock" class="checkbox"/> Rock<br />
         </div>
 
       </div>
 
       <div class="modal-container" style="background-color:#f1f1f1">
-        <button type="button" onclick="closeModal();" id="cancelbtn">Cancel</button>
+        <button type="button" onclick="closeModal('modal', 'cancelbtn');" id="cancelbtn">Cancelar</button>
         <button type="submit" onclick="register();" id="acceptbtn">¡Regístrame!</button>
       </div>
     </form>

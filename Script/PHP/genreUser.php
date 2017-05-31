@@ -25,6 +25,31 @@
       $db->close($stmt, $conn);
     }
 
+    function getGenres($email) {
+      $db = new DBSongluvr();
+      $conn = $db->connect();
+
+      $sql = "SELECT genreName FROM genre_user WHERE userEmail = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("s", $stmtEmail);
+
+      $stmtEmail = $email;
+      $ok = $stmt->execute();
+
+      $genres = array();
+
+      if($ok) {
+        $stmt->bind_result($genreName);
+        while ($stmt->fetch()) {
+          array_push($genres, $genreName);
+        }
+      }
+
+      $db->close($stmt, $conn);
+
+      return $genres;
+    }
+
   }
 
 ?>

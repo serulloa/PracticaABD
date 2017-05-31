@@ -6,7 +6,7 @@
 
     function loadPersonal($email) {
       echo "<div class='verticalTab'>
-              <button class='verticalTablinks' onclick='showModal();' id='modalBtn'>+ Nueva Conversación</button>";
+              <button class='verticalTablinks' onclick='showModal(".'"'."modalSend".'"'.", ".'"'."modalBtn".'"'.");' id='modalBtn'>+ Nueva Conversación</button>";
 
       $db = new DBSongluvr();
       $conn = $db->connect();

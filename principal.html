@@ -27,7 +27,7 @@
     <div class="userMenu">
       <button class="userBtn"></button>
       <div class="userMenu-content">
-        <a href="#">Perfil</a>
+        <a href="#" onclick="showModal('modalUser', 'profileBtn'); showProfile();" id="profileBtn">Perfil</a>
         <a href="index.html" onclick="return logout();">Cerrar sesión</a>
       </div>
     </div>
@@ -64,7 +64,7 @@
 
   </div>
 
-  <div id="modal" class="modal" onclick="closeModal();">
+  <div id="modalSend" class="modal" onclick="closeModal('modalSend', 'cancelbtnSend');">
     <form class="modal-content animate">
       <div class="modal-container">
         <label><b>Email del destinatario</b></label>
@@ -75,10 +75,21 @@
       </div>
 
       <div class="modal-container" style="background-color:#f1f1f1">
-        <button type="button" onclick="closeModal();" id="cancelbtn">Cancel</button>
+        <button type="button" onclick="closeModal('modalSend', 'cancelbtnSend');" class="cancelbtn" id="cancelbtnSend">Cancelar</button>
         <button type="submit" onclick="newConversation();" id="acceptbtn">Enviar</button>
       </div>
     </form>
+  </div>
+
+  <div id="modalUser" class="modal" onclick="closeModal('modalUser', 'cancelbtnUser');">
+    <div class="modal-content animate">
+      <div class="modal-container" id="fillSession">
+      </div>
+
+      <div class="modal-container" style="background-color:#f1f1f1">
+        <button type="button" onclick="closeModal('modalUser', 'cancelbtnUser');" class="cancelbtn" id="cancelbtnUser">Cerrar</button>
+      </div>
+    </div>
   </div>
 
 </body>

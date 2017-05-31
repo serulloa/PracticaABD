@@ -52,3 +52,16 @@ function newConversation() {
     alert("Ni email ni mensaje pueden ser vacíos.");
   }
 }
+
+function showProfile() {
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.open("GET", "Script/PHP/showProfile.php", false);
+  xhttp.onreadystatechange = function(){
+    if(xhttp.readyState == 4 && xhttp.status == 200){
+      document.getElementById('fillSession').innerHTML = xhttp.responseText;
+    }
+  };
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();
+}

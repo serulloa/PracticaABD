@@ -77,6 +77,35 @@
       $genreUser->insert($this->email, $this->genres);
     }
 
+    function update($email) {
+      $db = new DBSongluvr();
+      $conn = $db->connect();
+
+      $sql = "SELECT * FROM user WHERE email = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("s", $stmtEmail);
+
+      $stmtEmail = $email;
+      $ok = $stmt->execute();
+
+      $arrayData = null;
+
+      if($ok) {
+        $stmt->bind_result($email, $uname, $psw, $age);
+        while ($stmt->fetch()) {
+          $arrayData = array(
+            'email' => $email,
+            'uname' => $uname,
+            'psw' => $psw,
+            'age' => $age);
+        }
+      }
+
+      $db->close($stmt, $conn);
+
+      return $arrayData;
+    }
+
   }
 
 ?>

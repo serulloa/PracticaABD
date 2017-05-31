@@ -5,7 +5,7 @@
   $userArray = User::login($_POST['umail'], $_POST['psw']);
 
   if ($userArray != null) {
-    $user = new User($userArray['uname'], $userArray['email'], $userArray['psw'], $userArray['age']);
+    $user = new User($userArray['uname'], $userArray['email'], $userArray['age'], $userArray['psw']);
 
     session_start();
     $_SESSION['uname'] = $user->uname;
