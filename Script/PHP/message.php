@@ -90,7 +90,7 @@
             }
           }
 
-          $stmtText->close();
+          $db->close($stmtText, $connText);
         }
       }
 

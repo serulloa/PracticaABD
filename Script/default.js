@@ -32,7 +32,7 @@ function topnav() {
 function openTab(evt, tabName) {
     event.preventDefault();
 
-    //loadConvers(getCurrentTarget(evt));
+    loadConvers(getCurrentTarget(evt));
 
     var i, tabcontent, tablinks;
 
@@ -84,16 +84,16 @@ function loadConvers(element) {
   else if (type === "tabPersonal") divConvers = "personal";
 
   var query = "";
-  query = query.concat("type=", type);
+  query = query.concat("type=", divConvers);
 
   var xhttp = new XMLHttpRequest();
 
   xhttp.open("POST", "Script/PHP/loadConvers.php", true);
   xhttp.onreadystatechange = function(){
     if(xhttp.readyState == 4 && xhttp.status == 200){
-      //alert(xhttp.responseText);
+      alert(xhttp.responseText);
       //window.location.assign("index.html");
-      document.getElementById(divConvers).innerHTML = xhttp.responseText;
+      //document.getElementById(divConvers).innerHTML = xhttp.responseText;
     }
   };
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
