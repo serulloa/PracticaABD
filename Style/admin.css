@@ -28,8 +28,9 @@
 
 .input-group {
   margin: 10px;
-  padding: 5px;
   border-radius: 3px;
   border-color: #ccc;
   border-style: solid;
+  width: 150px;
+  height: 25px;
 }

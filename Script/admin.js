@@ -62,8 +62,8 @@ function loadUsers(str) {
     xhttp.open("POST", "Script/PHP/loadUsers.php", true);
     xhttp.onreadystatechange = function(){
       if(xhttp.readyState == 4 && xhttp.status == 200){
-        alert(xhttp.responseText);
-        //document.getElementById('user').innerHTML = xhttp.responseText;
+        //alert(xhttp.responseText);
+        document.getElementById('user').innerHTML = xhttp.responseText;
       }
     };
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

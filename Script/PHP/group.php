@@ -73,7 +73,7 @@
       return $ok;
     }
 
-    /*function loadUsers() {
+    function loadUsers() {
       $db = new DBSongluvr();
       $conn = $db->connect();
       $conn2 = $db->connect();
@@ -94,27 +94,28 @@
         }
       }
 
+      $db->close($stmt, $conn);
+      $conn = $db->connect();
+
       foreach ($arrayEmails as $email) {
-        $sql2 = "SELECT email FROM user WHERE (email = ?) AND (age < ?) AND (age > ?)";
-        $stmt2 = $conn2->prepare($sql2);
-        $stmt2->bind_param("sii", $stmt2Email, $stmt2MaxAge, $stmt2MinAge);
-        $stmt2Email = $email;
-        $stmt2MaxAge = $this->maxAge;
-        $stmt2MinAge = $this->minAge;
+        $sql = "SELECT email FROM user WHERE (email = ?) AND (age <= ?) AND (age >= ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sii", $stmtEmail, $stmtMaxAge, $stmtMinAge);
+        $stmtEmail = $email;
+        $stmtMaxAge = $this->maxAge;
+        $stmtMinAge = $this->minAge;
         $ok = $stmt->execute();
 
         if($ok) {
-          $stmt2->bind_result($emailres);
-          while ($stmt2->fetch()) {
+          $stmt->bind_result($emailres);
+          while ($stmt->fetch()) {
             echo "<option value='$emailres'>$emailres</option>";
           }
         }
       }
 
-      $stmt2->close();
-      $conn2->close();
       $db->close($stmt, $conn);
-    }*/
+    }
 
   }
 
