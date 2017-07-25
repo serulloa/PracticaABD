@@ -70,3 +70,25 @@ function loadUsers(str) {
     xhttp.send(query);
   }
 }
+
+function addUser() {
+  var group = document.getElementById('group').value;
+  var user = document.getElementById('user').value;
+
+  if (group !== "default") {
+    var query = "group=";
+    query = query.concat(group, "&user=", user);
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.open("POST", "Script/PHP/addUser.php", false);
+    xhttp.onreadystatechange = function(){
+      if(xhttp.readyState == 4 && xhttp.status == 200){
+        alert(xhttp.responseText);
+      }
+    };
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(query);
+  } else {
+    alert("Debe haber seleccionado un grupo primero.");
+  }
+}

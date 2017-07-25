@@ -28,8 +28,8 @@ function newConversation() {
     xhttp.onreadystatechange = function(){
       if(xhttp.readyState == 4 && xhttp.status == 200){
         alert(xhttp.responseText);
-        //window.location.assign("index.html");
-        document.getElementById('modal').click();
+        document.getElementById('modalSend').click();
+        document.getElementById('tabPersonal').click();
       }
     };
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

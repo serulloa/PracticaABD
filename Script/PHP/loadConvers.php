@@ -8,7 +8,7 @@
   $email = $_SESSION['email'];
 
   if ($type == 'group') {
-
+    Chats::loadGroupChats($email);
   } elseif ($type == 'personal') {
     Chats::loadPersonal($email);
   }

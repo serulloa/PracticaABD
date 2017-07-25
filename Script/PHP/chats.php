@@ -94,6 +94,44 @@
       return $existe;
     }
 
+    function loadGroupChats($email) {
+      echo "<div class='verticalTab'>";
+
+      $db = new DBSongluvr();
+      $conn = $db->connect();
+
+      $sql = "SELECT groupName FROM group_chat_user WHERE userEmail = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("s", $stmtEmail);
+
+      $stmtEmail = $email;
+      $ok = $stmt->execute();
+
+      $arrayGroups = array();
+
+      if ($ok) {
+        $stmt->bind_result($groupName);
+        while ($stmt->fetch()) {
+          echo "<button class='verticalTablinks' onclick='openChat(event, ".'"'.$groupName."Messages".'"'.");' id='".$groupName."'>";
+          echo $groupName;
+          echo "</button>";
+
+          array_push($arrayGroups, $groupName);
+        }
+      }
+
+      $db->close($stmt, $conn);
+
+      echo "</div>";
+      foreach ($arrayGroups as $groupContent) {
+        echo "<div id='".$groupContent."Messages' class='verticalTabcontent'>
+
+        </div>";
+      }
+
+
+    }
+
   }
 
 ?>

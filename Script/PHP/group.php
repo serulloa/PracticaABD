@@ -117,6 +117,24 @@
       $db->close($stmt, $conn);
     }
 
+    function addUser($group, $user) {
+      $db = new DBSongluvr();
+
+      $conn = $db->connect();
+
+      $sql = "INSERT INTO group_chat_user (groupName, userEmail) VALUES (?, ?)";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("ss", $stmtGroup, $stmtUser);
+
+      $stmtGroup = $group;
+      $stmtUser = $user;
+      $ok = $stmt->execute();
+
+      $db->close($stmt, $conn);
+
+      return $ok;
+    }
+
   }
 
 ?>
