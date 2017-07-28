@@ -11,7 +11,7 @@
   if ($type == 'global') {
     $message->loadGlobal();
   } elseif ($type == 'group') {
-    $message->loadGroup();
+    $message->loadGroup($id);
   } elseif ($type == 'personal') {
     $message->loadPersonal($id);
   }
