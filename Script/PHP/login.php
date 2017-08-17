@@ -13,5 +13,8 @@
     $_SESSION['age'] = $user->age;
     $_SESSION['admin'] = $user->admin;
   }
+  else {
+    echo "false";
+  }
 
 ?>

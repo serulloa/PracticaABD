@@ -20,6 +20,8 @@ function createGroup() {
     alert("Edad mínima no puede estar vacía.");
   } else if (minAge < 18) {
     alert("Edad mínima no puede estar por debajo de 18 años.");
+  } else if (minAge > maxAge) {
+    alert("Edad mínima no puede ser mayor que edad máxima.");
   } else {
     var query = "";
     query = query.concat("name=", name, "&genre=", genre, "&maxAge=", maxAge, "&minAge=", minAge);

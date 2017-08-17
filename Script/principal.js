@@ -36,7 +36,7 @@ function newConversation() {
     xhttp.send(query);
   }
   else {
-    alert("Ni email ni mensaje pueden ser vacíos.");
+    alert("Ni email ni mensaje pueden estar vacíos.");
   }
 }
 
@@ -57,9 +57,7 @@ function showProfile() {
 
 function showAdmin() {
   if (isAdmin()) {
-    var html = "<button type='button' onclick='goToAdmin();' id='adminbtn'>Administración</button>";
-    var innerHTML = document.getElementById('containerAdmin').innerHTML;
-    document.getElementById('containerAdmin').innerHTML = innerHTML + html;
+    document.getElementById("adminbtn").style.display = "block";
   }
 }
 

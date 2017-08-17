@@ -86,6 +86,8 @@ function login() {
   xhttp.open("POST", "Script/PHP/login.php", true);
   xhttp.onreadystatechange = function(){
     if(xhttp.readyState == 4 && xhttp.status == 200){
+      if(xhttp.responseText == "false")
+        alert("El usuario o la contraseña son incorrectos.");
       window.location.assign("principal.html");
     }
   };
